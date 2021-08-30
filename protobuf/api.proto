@@ -1,0 +1,37 @@
+syntax = "proto3";
+package example_datastore_service_api;
+// NOTE: It sucks that we have this Go-specific logic inside this file (which should be language-agnostic). However, the Protobuf team have
+// taken a hard stance on this being the way it should be done, so we have to do it this way.
+option go_package = "github.com/kurtosis-tech/example-datastore-microservice/golang/example_datastore_rpc_api_bindings";
+
+import "google/protobuf/empty.proto";
+
+service ExampleDatastoreService {
+  // Returns when the gRPC server is started and running
+  rpc IsAvailable(google.protobuf.Empty) returns (google.protobuf.Empty) {};
+
+  rpc Get(GetArgs) returns (GetResponse) {};
+
+  rpc Upsert(UpsertArgs) returns (google.protobuf.Empty) {};
+}
+
+
+// ==============================================================================================
+//                                        Get
+// ==============================================================================================
+message GetArgs {
+  string key = 1;
+}
+
+message GetResponse {
+  string value = 1;
+}
+
+
+// ==============================================================================================
+//                                        Upsert
+// ==============================================================================================
+message UpsertArgs {
+  string key = 1;
+  string value = 2;
+}
