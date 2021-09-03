@@ -10,7 +10,7 @@ orbs:
 #  images), so we run everything inside a single job.
 # See also: https://discuss.circleci.com/t/can-docker-images-be-preserved-between-jobs-in-a-workflow-without-a-manual-load-save/23388/12
 jobs:
-  check_golang:
+  check_golang_api:
     docker:
       - image: cimg/go:1.15.13
     steps:
@@ -25,7 +25,7 @@ jobs:
 
       - run: golang/scripts/build.sh
 
-  check_typescript:
+  check_typescript_api:
     docker:
       - image: cimg/node:14.17.1
     steps:
